@@ -8,6 +8,7 @@ import Home from '../Home/Home'
 import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
 import Movies from '../Movies/Movies'
+import CreateMovie from '../CreateMovie/CreateMovie'
 // Services
 import * as usersService from '../../utilities/users-service'
 // CSS
@@ -30,6 +31,7 @@ const App = () => {
         <Route path='/login' element={ <Login setUser={setUser}/> } />
         <Route path='/signup' element={ <SignUp /> } />
         <Route path='/movies' element={ user && <Movies />} />  
+        <Route path='/movies/create' element={ user && <CreateMovie />} />  
       </Routes>
 
       <Footer />

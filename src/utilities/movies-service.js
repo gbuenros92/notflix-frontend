@@ -14,8 +14,10 @@ export const getMovies = async () => {
         }
         
         const response = await axios.get(BASE_URL, options)
+        
+        return response
         // console.log(response)
     } catch(err) {
-        console.error.apply(err)
+        console.log(err)
     }
 }
