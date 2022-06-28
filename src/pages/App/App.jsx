@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 // Components
 import Nav from '../../components/Nav/Nav'
 import Footer from '../../components/Footer/Footer'
+import MovieDetails from '../../components/MovieDetails/MovieDetails'
+import UpdateMovieForm from '../../components/UpdateMovieForm/UpdateMovieForm'
 // Pages
 import Home from '../Home/Home'
 import Login from '../Login/Login'
@@ -18,7 +20,7 @@ const App = () => {
   const [user, setUser] = useState('')
 
   useEffect(() => {
-    if(usersService.getToken()) setUser(usersService.getUser())
+    if (usersService.getToken()) setUser(usersService.getUser())
   }, [])
 
   return (
@@ -27,11 +29,18 @@ const App = () => {
 
       {/* client-side route that renders the component instance if the path matches the url in the address bar */}
       <Routes>
-        <Route path='/' element={ <Home /> } />
-        <Route path='/login' element={ <Login setUser={setUser}/> } />
-        <Route path='/signup' element={ <SignUp /> } />
-        <Route path='/movies' element={ user && <Movies />} />  
-        <Route path='/movies/create' element={ user && <CreateMovie />} />  
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login setUser={setUser} />} />
+        <Route path='/signup' element={<SignUp setUser={setUser} />} />
+        {
+          user &&
+          <>
+            <Route path='/movies' element={<Movies />} />
+            <Route path='/movies/create' element={<CreateMovie />} />
+            <Route path='/movies/:id' element={<MovieDetails />} />
+            <Route path='/movies/:id/edit' element={<UpdateMovieForm />} />
+          </>
+        }
       </Routes>
 
       <Footer />
